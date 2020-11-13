@@ -34,5 +34,6 @@ App is based on Spring Boot as Initializer.
     
 5. Process step 1,4 run continuously, until there is external interrupt to system. Writing new topics, reading, storing, joining, combining and writing back the combine message to Kafka cluster. 
 
+-- Leaving UT for a while
 ### Custom Serde implementation provided for each model class
 
