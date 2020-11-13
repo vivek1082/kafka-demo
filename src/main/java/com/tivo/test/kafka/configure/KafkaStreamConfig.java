@@ -64,7 +64,7 @@ public class KafkaStreamConfig {
 
 	@Bean(name = "msgCombinerStream")
 	public KafkaStreams msgmsgCombinerStream() {
-		KafkaStreams kafkaStreams = new KafkaStreams(buildTopology(), new Properties());
+		KafkaStreams kafkaStreams = new KafkaStreams(buildTopology(), buildStreamProperty());
 
 		return kafkaStreams;
 	}
