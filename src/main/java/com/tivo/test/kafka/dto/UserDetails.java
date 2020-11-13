@@ -37,6 +37,10 @@ public class UserDetails extends UserId implements Serializable {
 		return "UserDetails [userBasic=" + userBasic + ", userMessage=" + userMessage + "]";
 	}
 	
+	public static UserDetails newBuilder() {
+		return new UserDetails(null, null);
+		
+	}
 	
 	
 
