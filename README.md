@@ -1,4 +1,4 @@
-# kafka streaming ecosystem demo app
+# kafka streaming ecosystem demo app - Do read READ.ME and system arch. before looking into code.
 Application for Kafka Streaming and Processing System 
 ## Problem Statement --
 There are Users in a system. Each user has some basic details and user has also written some messages in the system.
