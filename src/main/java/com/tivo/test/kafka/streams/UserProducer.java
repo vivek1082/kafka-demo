@@ -1,4 +1,4 @@
-package com.tivo.test.kafka.messaging;
+package com.tivo.test.kafka.streams;
 
 import java.util.concurrent.ExecutorService;
 
