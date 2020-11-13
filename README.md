@@ -14,6 +14,9 @@ Additionally system should also produce all the msg related to user.
 
 ![Alt text](docs/images/system-arch.jpg?raw=true "Sysyem Architecture")
 
+## Output Snapshot on Kafka console
+
+![Alt text](docs/images/output.jpg?raw=true "Output")
 
 ## Solution (Code is self explanatory, codes are better than stories ;) )
 Demo app uses both Kafka client and Kafka Streaming Apis to solve this.
@@ -31,6 +34,5 @@ App is based on Spring Boot as Initializer.
     
 5. Process step 1,4 run continuously, until there is external interrupt to system. Writing new topics, reading, storing, joining, combining and writing back the combine message to Kafka cluster. 
 
-### To avoid Avro Registry, Custom Serde implementation provided for each model
+### Custom Serde implementation provided for each model class
 
-### Leaving UT for a while.
