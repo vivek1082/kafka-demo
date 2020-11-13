@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: tivo-demo
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: tivo-demo
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    
+
+message:
+  basic-topic: user-basic
+  message-topic: user-message
+  detail-topic: user-detail
+  messages-per-request: 10
+  
+logging:
+  level:
+    root: INFO
+  
