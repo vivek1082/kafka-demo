@@ -20,6 +20,7 @@ public class UserMessageSerde implements Serde<UserMessage> {
 		public byte[] serialize(String topic, UserMessage data) {
 			byte[] retVal = null;
 			ObjectMapper objectMapper = new ObjectMapper();
+			objectMapper.enableDefaultTyping();
 			try {
 				retVal = objectMapper.writeValueAsString(data).getBytes();
 			} catch (Exception e) {

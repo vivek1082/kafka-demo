@@ -6,8 +6,12 @@ import org.apache.kafka.common.serialization.Deserializer;
 import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serializer;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tivo.test.kafka.dto.Address;
+import com.tivo.test.kafka.dto.UserBasic;
 import com.tivo.test.kafka.dto.UserDetails;
+import com.tivo.test.kafka.dto.UserMessage;
 
 public class UserDetailSerde implements Serde<UserDetails> {
 
@@ -20,6 +24,7 @@ public class UserDetailSerde implements Serde<UserDetails> {
 		public byte[] serialize(String topic, UserDetails data) {
 			byte[] retVal = null;
 			ObjectMapper objectMapper = new ObjectMapper();
+			objectMapper.enableDefaultTyping();
 			try {
 				retVal = objectMapper.writeValueAsString(data).getBytes();
 			} catch (Exception e) {
@@ -35,13 +40,22 @@ public class UserDetailSerde implements Serde<UserDetails> {
 		@Override
 		public UserDetails deserialize(String topic, byte[] data) {
 			ObjectMapper mapper = new ObjectMapper();
-			UserDetails userBasic = null;
+			UserDetails userDetail = null;
 			try {
-				userBasic = mapper.readValue(data, UserDetails.class);
+				JsonNode detailNode = mapper.readTree(data);
+				JsonNode basicNode = detailNode.get("userBasic");
+				UserBasic basic = new UserBasic(basicNode.get("id").asLong(), basicNode.get("userName").asText(),
+						new Address(basicNode.get("address").get("zipCode").asInt()));
+				
+				JsonNode messageNode = detailNode.get("userMessage");
+				UserMessage message = mapper.treeToValue(messageNode, UserMessage.class);
+				UserDetails details = new UserDetails(basic, message);
+				//userDetail = mapper.readValue(data, UserDetails.class);
+				userDetail = details;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			return userBasic;
+			return userDetail;
 		}
 	}
 

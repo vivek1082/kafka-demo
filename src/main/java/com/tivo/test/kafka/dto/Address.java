@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Address implements Serializable {
 
 	
-	private static final long serialVersionUID = 2101381221857221270L;
+	private static final long serialVersionUID = 1L;
 	
 	//keeping the bare minimum detail
 	private Integer zipCode;

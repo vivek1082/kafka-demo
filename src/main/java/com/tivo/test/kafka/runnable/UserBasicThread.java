@@ -36,9 +36,9 @@ public class UserBasicThread implements Runnable {
 		}
 	}
 
-	private void sendMessage(int id) {
+	private void sendMessage(Integer id) {
 
-		ListenableFuture<SendResult<String, UserBasic>> future = userBasic.send(topicName,
+		ListenableFuture<SendResult<String, UserBasic>> future = userBasic.send(topicName,id.toString(),
 				new UserBasic((long) id, "test" + id, new Address(Integer.parseInt("0000" + id))));
 
 		future.addCallback(new ListenableFutureCallback<SendResult<String, UserBasic>>() {

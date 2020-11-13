@@ -3,13 +3,16 @@ package com.tivo.test.kafka.dto;
 import java.io.Serializable;
 
 public class UserDetails extends UserId implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	private UserBasic userBasic;
-	
+
 	private UserMessage userMessage;
-	
+
+	public UserDetails() {
+	}
+
 	public UserDetails(UserBasic userBasic, UserMessage userMessage) {
 		super(userBasic.getId());
 		this.userBasic = userBasic;
@@ -36,12 +39,10 @@ public class UserDetails extends UserId implements Serializable {
 	public String toString() {
 		return "UserDetails [userBasic=" + userBasic + ", userMessage=" + userMessage + "]";
 	}
-	
+
 	public static UserDetails newBuilder() {
-		return new UserDetails(null, null);
-		
+		return new UserDetails();
+
 	}
-	
-	
 
 }

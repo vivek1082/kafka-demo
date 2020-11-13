@@ -6,7 +6,9 @@ import org.apache.kafka.common.serialization.Deserializer;
 import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serializer;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tivo.test.kafka.dto.Address;
 import com.tivo.test.kafka.dto.UserBasic;
 
 public class UserBasicSerde implements Serde<UserBasic> {
@@ -19,6 +21,7 @@ public class UserBasicSerde implements Serde<UserBasic> {
 		public byte[] serialize(String topic, UserBasic data) {
 			byte[] retVal = null;
 			ObjectMapper objectMapper = new ObjectMapper();
+			objectMapper.enableDefaultTyping();
 			try {
 				retVal = objectMapper.writeValueAsString(data).getBytes();
 			} catch (Exception e) {
@@ -36,7 +39,13 @@ public class UserBasicSerde implements Serde<UserBasic> {
 			ObjectMapper mapper = new ObjectMapper();
 			UserBasic userBasic = null;
 			try {
-				userBasic = mapper.readValue(data, UserBasic.class);
+				JsonNode userNode = mapper.readTree(data);
+
+				Long long1 = userNode.get("id").asLong();
+				UserBasic basic = new UserBasic(userNode.get("id").asLong(), userNode.get("userName").asText(),
+						new Address(userNode.get("address").get("zipCode").asInt()));
+
+				userBasic = basic;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
