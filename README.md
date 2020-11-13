@@ -1,6 +1,6 @@
 # kafka streaming ecosystem demo app
 Application for Kafka Streaming and Processing System 
-Problem Statement --
+## Problem Statement --
 There are Users in a system. Each user has some basic details and user has also written some messages in the system.
 User Basic Detail exist in system in form of a kafka msg on a topic 'user-basic'.
 User Messages also exist on system in a separate kafka msg on a different topic 'user-message'.
